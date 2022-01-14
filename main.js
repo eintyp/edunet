@@ -16,7 +16,59 @@ let network = [
  * neuron count (layer 2): network[2].length / neuron count (layer 1)
  */
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
+
+
+
+
+
+	let canvasElement = (tagName, attributes = {}) => {
+		let elem = document.createElementNS('http://www.w3.org/2000/svg', tagName);
+		for (attr in attributes) {
+			elem.setAttribute(attr, attributes['attr']);
+		}
+		return elem;
+	}
+
+	let createNeuron = (x, y) => {
+		return document.querySelector('.canvas .network').appendChild(
+			canvasElement('rect', {
+				x: x,
+				y: y,
+				width: 64,
+				height: 48,
+				rx: 8
+			})
+		);
+	}
+
+	let createAxon = (x1, y1, x2, y2, ctrl = 128) => {
+		return document.querySelector('.canvas .network').appendChild(
+			canvasElement('path', {
+				d: `M ${x1},${y1} C ${x1 + ctrl},${y1} ${x2 - ctrl},${y2} ${x2},${y2}`
+			})
+		);
+	}
+
+	let createInput = (x, y, callback, className = 'weight', value = 0) => {
+		let container = canvasElement('foreignObject', {
+			x: x,
+			y: y,
+			width: 48,
+			height: 24
+		});
+
+		let input = canvasElement('input', {
+			type: 'number',
+			value: value || 0,
+			class: className
+		});
+
+		input.addEventListener('input', callback);
+		container.appendChild(input);
+		return document.querySelector('.canvas .overlay').appendChild(container);
+	}
+
 
 	let getNeuronCount = (l = network.length - 1) => {
 		let n = 1;
