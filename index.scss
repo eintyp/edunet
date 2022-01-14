@@ -84,6 +84,15 @@ body {
 
 
 
+
+	.layer-labels {
+		height: 100%;
+		flex-grow: 1;
+		display: flex;
+		justify-content: space-evenly;
+	}
+
+
 	.layer-label, .button {
 		position: relative;
 		box-sizing: border-box;
@@ -144,14 +153,4 @@ body {
 
 	}
 
-}
-
-
-// will probably remove in the futore (@TODO)
-.layer-labels {
-	width: 48rem;
-	height: 100%;
-	margin: 0 .5rem;
-	display: flex;
-	justify-content: space-between;
 }
