@@ -1,3 +1,7 @@
+
+$focus-color: #39c;
+
+
 body {
 	font-family: 'Ubuntu', sans-serif;
 	font-weight: 300;
@@ -11,6 +15,15 @@ body {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+}
+
+button {
+	font: inherit;
+}
+
+::selection {
+	background-color: $focus-color;
+	color: #fff;
 }
 
 .section {
@@ -27,6 +40,11 @@ body {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+
+		a {
+			color: $focus-color;
+		}
+
 	}
 
 
@@ -71,6 +89,11 @@ body {
 				background: #eee;
 				border-radius: 6px;
 				box-shadow: .1rem .1rem .2rem #0002 inset;
+
+				&:focus {
+					box-shadow: 0 0 0 2px $focus-color inset,.1rem .1rem .2rem #0002 inset;
+				}
+
 			}
 
 			.in {
@@ -107,6 +130,7 @@ body {
 		align-items: center;
 		justify-content: center;
 		overflow: hidden;
+		outline: 0;
 
 
 		input {
@@ -129,7 +153,7 @@ body {
 		&:hover input, input:focus { opacity: 1 }
 
 		&:focus-within {
-			border-color: #39c;
+			border-color: $focus-color;
 		}
 
 	}
