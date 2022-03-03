@@ -24,6 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		];
 	}
 
+	const functionTemplates = {
+		threshold: x => ( x < 10 ? 0 : 1 ),
+		sigmoid: x => 1 / (1 + Math.E ** (-1 * (x - 0)))
+	};
+	let f = functionTemplates['threshold'];
 
 
 
@@ -157,8 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		calc();
 	}
 
-	let f = (x) => ( x < 10 ? 0 : 1 );
-
 	let calc = () => {
 		let neurons = [];
 		let neuronCount = 1;
@@ -274,6 +277,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.querySelector('.canvas .overlay').innerHTML = '';
 		buildNetwork();
 		buildLabels();
+
+		document.forms.functionType.addEventListener('change', e => {
+			f = functionTemplates[document.forms.functionType.function.value];
+			calc();
+		});
 	}
 
 

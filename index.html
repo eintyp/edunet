@@ -21,8 +21,30 @@
 		</svg>
 	</div>
 	<div class="section section-bottom">
-		<div></div>
-		<div class="function">f(x)=0 ∀ x&lt;10<br>f(x)=1 ∀ x≥10</div>
+
+		<form name="functionType" class="function-selector">
+			<label>
+				<input type="radio" name="function" value="threshold" checked>
+				<div class="function">
+					f(x) = {
+					<span class="stack">
+						<span>0 ∀ x&lt;10</span>
+						<span>1 ∀ x≥10</span>
+					</span>
+				</div>
+			</label>
+			<label>
+				<input type="radio" name="function" value="sigmoid" checked>
+				<div class="function">
+					f(x) =
+					<span class="fraction">
+						<span>1</span>
+						<span>1+e<sup>-x</sup></span>
+					</span>
+				</div>
+	    	</label>
+		</form>
+
 		<div class="copyright">Made by <a href="https://github.com/eintyp">eintyp</a>, released for free under a <a href="https://github.com/eintyp/edunet/blob/main/LICENSE">GPL v3.0 license</a>.</div>
 	</div>
 </body>

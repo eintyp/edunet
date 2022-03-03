@@ -177,4 +177,49 @@ button {
 
 	}
 
+
+	.function-selector {
+		display: flex;
+
+		input {
+			position: absolute;
+			left: -10rem;
+
+			&:checked + .function {
+				box-shadow: 0 0 0 .2rem $focus-color inset;
+			}
+		}
+
+		.function {
+			display: flex;
+			align-items: center;
+			box-sizing: border-box;
+			height: 100%;
+			padding: .4rem;
+			border-radius: .5rem;
+
+			&:hover {
+				background-color: #ddd;
+			}
+
+			.stack, .fraction {
+				display: flex;
+				flex-direction: column;
+				padding: 0 .2em;
+				line-height: 1;
+			}
+
+			.fraction {
+				text-align: center;
+
+				> :first-child {
+					border-bottom: 1px solid;
+				}
+
+			}
+
+		}
+	}
+
+
 }
