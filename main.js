@@ -3,12 +3,6 @@
 
 const width = 768, height = 512;
 
-let network = [
-	[ 0, 0 ],
-	[ 0, 0, 0, 0, 0, 0 ],
-	[ 0, 0, 0 ]
-]
-
 /*
  * layer count: network.length
  * neuron count (layer 0): network[0].length
@@ -18,6 +12,17 @@ let network = [
 
 document.addEventListener('DOMContentLoaded', () => {
 
+
+	let network;
+	try {
+		network = JSON.parse(location.hash.substr(2));
+	} catch (e) {
+		network = [
+			[ 0, 0 ],
+			[ 0, 0, 0, 0, 0, 0 ],
+			[ 0, 0, 0 ]
+		];
+	}
 
 
 
@@ -189,6 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				document.querySelector('.canvas .text').appendChild(actNode);
 			}
 		}
+
+		location.hash = `#/${JSON.stringify(network)}`;
 	}
 
 
