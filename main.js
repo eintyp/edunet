@@ -14,15 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 	let network;
-	try {
-		network = JSON.parse(location.hash.substr(2));
-	} catch (e) {
-		network = [
-			[ 0, 0 ],
-			[ 0, 0, 0, 0, 0, 0 ],
-			[ 0, 0, 0 ]
-		];
-	}
 
 	const functionTemplates = {
 		threshold: x => ( x < 10 ? 0 : 1 ),
@@ -272,6 +263,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	let build = () => {
+		try {
+			network = JSON.parse(location.hash.substr(2));
+		} catch (e) {
+			network = [
+				[ 0, 0 ],
+				[ 0, 0, 0, 0, 0, 0 ],
+				[ 0, 0, 0 ]
+			];
+		}
+		f = functionTemplates[document.forms.functionType.function.value];
+
 		document.querySelector('.layer-labels').innerHTML = '';
 		document.querySelector('.canvas .network').innerHTML = '';
 		document.querySelector('.canvas .overlay').innerHTML = '';
