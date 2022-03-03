@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				let sum = 0;
 
 				for (let a = 0; a < network[layer].length / neuronCount; a ++) {
-					sum += neurons[layer - 1][a] * network[layer][neuron * (neuronCount - 1) + a];
+					sum += neurons[layer - 1][a] * network[layer][neuron * (network[layer].length / neuronCount) + a];
 				}
 
 				neurons[layer][neuron] = f(sum);
@@ -189,8 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				document.querySelector('.canvas .text').appendChild(actNode);
 			}
 		}
-
-		console.log(neurons);
 	}
 
 
