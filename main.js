@@ -3,21 +3,20 @@
 
 const width = 768, height = 512;
 
-try {
-	network = JSON.parse(location.hash.substr(2));
-} catch (e) {
-	network = [
-		[ 0, 0 ],
-		[ 0, 0, 0, 0, 0, 0 ],
-		[ 0, 0, 0 ]
-	];
-}
-
 
 document.addEventListener('DOMContentLoaded', () => {
 
 
 	let network;
+	try {
+		network = JSON.parse(location.hash.substr(2));
+	} catch (e) {
+		network = [
+			[ 0, 0 ],
+			[ 0, 0, 0, 0, 0, 0 ],
+			[ 0, 0, 0 ]
+		];
+	}
 
 	const functionTemplates = {
 		threshold: x => ( x < 10 ? 0 : 1 ),
