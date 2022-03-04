@@ -3,12 +3,16 @@
 
 const width = 768, height = 512;
 
-/*
- * layer count: network.length
- * neuron count (layer 0): network[0].length
- * neuron count (layer 1): network[1].length / neuron count (layer 0)
- * neuron count (layer 2): network[2].length / neuron count (layer 1)
- */
+try {
+	network = JSON.parse(location.hash.substr(2));
+} catch (e) {
+	network = [
+		[ 0, 0 ],
+		[ 0, 0, 0, 0, 0, 0 ],
+		[ 0, 0, 0 ]
+	];
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -263,23 +267,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	let build = () => {
-		try {
-			network = JSON.parse(location.hash.substr(2));
-		} catch (e) {
-			network = [
-				[ 0, 0 ],
-				[ 0, 0, 0, 0, 0, 0 ],
-				[ 0, 0, 0 ]
-			];
-		}
-		f = functionTemplates[document.forms.functionType.function.value];
-
 		document.querySelector('.layer-labels').innerHTML = '';
 		document.querySelector('.canvas .network').innerHTML = '';
 		document.querySelector('.canvas .overlay').innerHTML = '';
 		buildNetwork();
 		buildLabels();
 
+		f = functionTemplates[document.forms.functionType.function.value];
 		document.forms.functionType.addEventListener('change', e => {
 			f = functionTemplates[document.forms.functionType.function.value];
 			calc();
