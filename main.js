@@ -296,4 +296,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	build();
 
+
+
+	{
+		let dragging = false;
+		let dx, dy, x = 0, y = 0;
+		document.querySelector('.canvas').parentNode.addEventListener('mousedown', e => {
+			dragging = true;
+			dx = e.clientX - x;
+			dy = e.clientY - y;
+			document.querySelector('.canvas').parentNode.style.cursor = 'grabbing';
+		});
+		document.querySelector('.canvas').parentNode.style.cursor = 'grab';
+
+		document.addEventListener('mousemove', e => {
+			if (!dragging) return;
+
+			x = e.clientX - dx;
+			y = e.clientY - dy;
+			document.querySelector('.canvas').style.transform = `translate(${x}px, ${y}px)`;
+		});
+		document.addEventListener('mouseup', e => {
+			dragging = false;
+			document.querySelector('.canvas').parentNode.style.cursor = 'grab';
+		});
+	}
+
 });
