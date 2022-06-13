@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				sumNode.innerHTML = `∑=${Math.round(sum * 100) / 100}`;
 				actNode.setAttribute('x', (width - 64) / (network.length - 1) * layer + 32);
 				actNode.setAttribute('y', neuronY (neuronCount, neuron) + 34);
-				actNode.innerHTML = `f(x)=${Math.round(neurons[layer][neuron] * 100) / 100}`;
+				actNode.innerHTML = `φ(∑)=${Math.round(neurons[layer][neuron] * 100) / 100}`;
 				document.querySelector('.canvas .text').appendChild(sumNode);
 				document.querySelector('.canvas .text').appendChild(actNode);
 			}
