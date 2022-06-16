@@ -1,4 +1,4 @@
 # edunet
-A simple visual application to teach people how artificial neural networks work.
+A simple visual application to teach about artificial neural networks.
 
 [see it in action on GitHub Pages](https://eintyp.github.io/edunet/)
