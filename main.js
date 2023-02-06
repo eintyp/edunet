@@ -26,15 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-	let canvasElement = (tagName, attributes = {}) => {
-		let elem = document.createElementNS('http://www.w3.org/2000/svg', tagName);
+	const canvasElement = (tagName, attributes = {}) => {
+		const elem = document.createElementNS('http://www.w3.org/2000/svg', tagName);
 		for (attr in attributes) {
 			elem.setAttribute(attr, attributes['attr']);
 		}
 		return elem;
 	}
 
-	let createNeuron = (x, y) => {
+	const createNeuron = (x, y) => {
 		return document.querySelector('.canvas .network').appendChild(
 			canvasElement('rect', {
 				x: x,
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		);
 	}
 
-	let createAxon = (x1, y1, x2, y2, ctrl = 128) => {
+	const createAxon = (x1, y1, x2, y2, ctrl = 128) => {
 		return document.querySelector('.canvas .network').appendChild(
 			canvasElement('path', {
 				d: `M ${x1},${y1} C ${x1 + ctrl},${y1} ${x2 - ctrl},${y2} ${x2},${y2}`
@@ -54,15 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		);
 	}
 
-	let createInput = (x, y, callback, className = 'weight', value = 0) => {
-		let container = canvasElement('foreignObject', {
+	const createInput = (x, y, callback, className = 'weight', value = 0) => {
+		const container = canvasElement('foreignObject', {
 			x: x,
 			y: y,
 			width: 48,
 			height: 24
 		});
 
-		let input = canvasElement('input', {
+		const input = canvasElement('input', {
 			type: 'number',
 			value: value || 0,
 			class: className
@@ -74,14 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 
-	let getNeuronCount = (l = network.length - 1) => {
+	const getNeuronCount = (l = network.length - 1) => {
 		let n = 1;
 		for (let layer = 0; layer <= l; layer ++) n = network[layer].length / n;
 		return n;
 	}
 
-	let n = (x, y) => {
-		let e = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+	const n = (x, y) => {
+		const e = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 		e.setAttribute('x', x);
 		e.setAttribute('y', y);
 		e.setAttribute('width', 64);
@@ -90,20 +90,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		return document.querySelector('.canvas .network').appendChild(e);
 	}
 
-	let a = (x1, y1, x2, y2, ctrl = 128) => {
-		let e = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+	const a = (x1, y1, x2, y2, ctrl = 128) => {
+		const e = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 		e.setAttribute('d', `M ${x1},${y1} C ${x1 + ctrl},${y1} ${x2 - ctrl},${y2} ${x2},${y2}`);
 		return document.querySelector('.canvas .network').appendChild(e);
 	}
 
-	let i = (x, y, value = 0, callback, cname = 'weight') => {
-		let c = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
+	const i = (x, y, value = 0, callback, cname = 'weight') => {
+		const c = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
 		c.setAttribute('x', x);
 		c.setAttribute('y', y);
 		c.setAttribute('width', 48);
 		c.setAttribute('height', 24);
 
-		let e = document.createElement('input');
+		const e = document.createElement('input');
 		e.setAttribute('type', 'number');
 		e.setAttribute('value', value || 0);
 		e.setAttribute('class', cname);
@@ -115,12 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 
-	let onLayerInput = (e) => {
-		let val = parseInt(e.target.value);
+	const onLayerInput = (e) => {
+		const val = parseInt(e.target.value);
 		if (isNaN(val)) return;
 
-		let layer = parseInt(e.target.parentNode.dataset.layer);
-		let neuronCount = getNeuronCount(layer);
+		const layer = parseInt(e.target.parentNode.dataset.layer);
+		const neuronCount = getNeuronCount(layer);
 
 		/*if (val < neuronCount) {
 			if (layer < network.length - 1) {
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// doing the lazy approach for now
 		if (layer < network.length - 1) {
-			let nextNeuronCount = getNeuronCount(layer + 1);
+			const nextNeuronCount = getNeuronCount(layer + 1);
 			network[layer + 1] = [];
 			for (let i = 0; i < val * nextNeuronCount; i ++) network[layer + 1].push(0);
 		}
@@ -148,15 +148,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		buildNetwork();
 	}
 
-	let onNetInput = (e) => {
-		let val = parseFloat(e.target.value);
+	const onNetInput = (e) => {
+		const val = parseFloat(e.target.value);
 		if (isNaN(val)) return;
 
 		network[e.target.parentNode.dataset.layer][e.target.parentNode.dataset.axon] = val;
 		calc();
 	}
 
-	let calc = () => {
+	const calc = () => {
 		let neurons = [];
 		let neuronCount = 1;
 		document.querySelector('.canvas .text').innerHTML = '';
@@ -179,8 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				neurons[layer][neuron] = f(sum);
 
-				let sumNode = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-				let actNode = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+				const sumNode = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+				const actNode = document.createElementNS('http://www.w3.org/2000/svg', 'text');
 				sumNode.setAttribute('x', (width - 64) / (network.length - 1) * layer + 32);
 				sumNode.setAttribute('y', neuronY (neuronCount, neuron) + 14);
 				sumNode.innerHTML = `∑=${Math.round(sum * 100) / 100}`;
@@ -197,11 +197,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 	/* Base, Height, Distance, Count, Number */
-	let centeredY = (b,d,c,n) => ( b + (n - c/2) * d );
-	let neuronY = (c,n) => (centeredY (height / 2, 96, c, n) + 24);
+	const centeredY = (b,d,c,n) => ( b + (n - c/2) * d );
+	const neuronY = (c,n) => (centeredY (height / 2, 96, c, n) + 24);
 
 	/* it's beautiful */
-	let buildNetwork = () => {
+	const buildNetwork = () => {
 		let layerCount = network.length;
 		let neuronCount = 1;
 
@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		calc();
 	}
 
-	let buildLabels = () => {
+	const buildLabels = () => {
 		let neuronCount = 1;
 		for (let layer = 0; layer < network.length; layer ++) {
 			neuronCount = network[layer].length / neuronCount;
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	let build = () => {
+	const build = () => {
 		document.querySelector('.layer-labels').innerHTML = '';
 		document.querySelector('.canvas .network').innerHTML = '';
 		document.querySelector('.canvas .overlay').innerHTML = '';
