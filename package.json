@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "node-sass": "^9.0.0"
+  },
+  "scripts": {
+    "dev": "node-sass --watch index.scss index.css",
+    "build": "node-sass --output-style compressed index.scss index.css"
+  }
+}
